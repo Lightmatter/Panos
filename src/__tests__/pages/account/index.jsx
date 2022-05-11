@@ -1,10 +1,7 @@
 import React from 'react';
-import EditProfile from 'codereview/src/pages/account/index';
+import EditProfile from 'pages/account/index';
 import { SnackbarProvider } from 'notistack';
-import {
-  CurrentUserProvider,
-  useMutateCurrentUser,
-} from 'codereview/src/models/user';
+import { CurrentUserProvider, useMutateCurrentUser } from 'models/user';
 import { createMount } from '@material-ui/core/test-utils';
 
 describe('Edit profile page', () => {

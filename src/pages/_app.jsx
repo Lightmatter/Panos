@@ -1,30 +1,23 @@
 /* eslint-disable  max-classes-per-file */
-import * as Sentry from '@sentry/node';
-import 'codereview/src/util/sentry';
+import * as Sentry from '@sentry/nextjs';
+import 'util/sentry';
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline, Grid } from '@material-ui/core';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { SnackbarProvider } from 'notistack';
 import NProgress from 'nprogress';
 
 import theme from 'theme/theme';
-import { CurrentUserProvider } from 'codereview/src/models/user';
-import isServer from 'codereview/src/util/isServer';
+import { CurrentUserProvider } from 'models/user';
+import isServer from 'util/isServer';
 
-import Header from 'codereview/src/components/Header';
-import Footer from 'codereview/src/components/Footer';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 NProgress.configure({ parent: '#container' });
-
-Router.events.on('routeChangeStart', url => {
-  console.log(`Loading: ${url}`);
-  NProgress.start();
-});
-Router.events.on('routeChangeComplete', () => NProgress.done());
-Router.events.on('routeChangeError', () => NProgress.done());
 
 const useStyles = makeStyles({
   Footer: {
@@ -48,6 +41,8 @@ const debugForceIP = () => {
 
 const fileLabel = 'pages/_app';
 export default function App(props) {
+  const router = useRouter();
+
   debugForceIP();
   const { Component, pageProps } = props;
   const classes = useStyles();
@@ -67,6 +62,26 @@ export default function App(props) {
     message: `Preparing app (${isServer() ? 'server' : 'browser'})`,
     level: Sentry.Severity.Debug,
   });
+
+  useEffect(() => {
+    const handleStart = url => {
+      console.log(`Loading: ${url}`);
+      NProgress.start();
+    };
+    const handleStop = () => {
+      NProgress.done();
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleStop);
+    router.events.on('routeChangeError', handleStop);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleStop);
+      router.events.off('routeChangeError', handleStop);
+    };
+  }, [router]);
 
   return (
     <>

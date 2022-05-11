@@ -7,9 +7,9 @@ import Avatar from '@material-ui/core/Avatar';
 import { TextField } from 'formik-material-ui';
 import { makeStyles } from '@material-ui/core/styles';
 
-import AccountPageHeader from 'codereview/src/components/AccountPageHeader';
-import { withAuthRequired } from 'codereview/src/util/withAuth';
-import { changeEmail, ChangeEmailSchema } from 'codereview/src/models/user';
+import AccountPageHeader from 'components/AccountPageHeader';
+import { withAuthRequired } from 'util/withAuth';
+import { changeEmail, ChangeEmailSchema } from 'models/user';
 
 const useStyles = makeStyles(theme => ({
   paper: {

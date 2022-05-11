@@ -5,12 +5,12 @@ import { Form, Field, Formik } from 'formik';
 import { TextField, CheckboxWithLabel } from 'formik-material-ui';
 
 import { useRouter } from 'next/router';
-import AccountPageHeader from 'codereview/src/components/AccountPageHeader';
-import Link from 'codereview/src/components/router/Link';
-import PasswordField from 'codereview/src/components/PasswordField';
-import { registerUser, logIn, SignupSchema } from 'codereview/src/models/user';
+import AccountPageHeader from 'components/AccountPageHeader';
+import Link from 'components/router/Link';
+import PasswordField from 'components/PasswordField';
+import { registerUser, logIn, SignupSchema } from 'models/user';
 import { useSnackbar } from 'notistack';
-import { postLoginUrl, withoutAuth } from 'codereview/src/util/withAuth';
+import { postLoginUrl, withoutAuth } from 'util/withAuth';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -179,7 +179,7 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
                 Already have an account? Sign in

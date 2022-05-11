@@ -7,7 +7,7 @@ import {
   withAuthRequired,
   withAuth,
   withoutAuth,
-} from 'codereview/src/util/withAuth';
+} from 'util/withAuth';
 //TODO: sets correctly for server or frontend
 
 describe('forwardRequestHeaders', () => {

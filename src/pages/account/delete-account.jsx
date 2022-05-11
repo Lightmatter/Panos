@@ -17,9 +17,9 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-import AccountPageHeader from 'codereview/src/components/AccountPageHeader';
-import { deleteUser, DeleteUserSchema } from 'codereview/src/models/user';
-import { withAuthRequired } from 'codereview/src/util/withAuth';
+import AccountPageHeader from 'components/AccountPageHeader';
+import { deleteUser, DeleteUserSchema } from 'models/user';
+import { withAuthRequired } from 'util/withAuth';
 
 const useStyles = makeStyles(theme => ({
   paper: {

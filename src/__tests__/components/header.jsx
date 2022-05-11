@@ -2,10 +2,10 @@ import React from 'react';
 import { createMount } from '@material-ui/core/test-utils';
 
 import renderer from 'react-test-renderer';
-import Header from 'codereview/src/components/Header';
+import Header from 'components/Header';
 
 import { SnackbarProvider } from 'notistack';
-import { CurrentUserProvider } from 'codereview/src/models/user';
+import { CurrentUserProvider } from 'models/user';
 import { act } from 'react-dom/test-utils';
 
 describe('Header', () => {

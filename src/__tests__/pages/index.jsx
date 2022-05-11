@@ -1,5 +1,5 @@
 import React from 'react';
-import Index from 'codereview/src/pages/index';
+import Index from 'pages/index';
 import { mount } from 'enzyme';
 
 it('renders homepage unchanged', () => {

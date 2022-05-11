@@ -1,10 +1,7 @@
 import React from 'react';
-import Login from 'codereview/src/pages/login';
+import Login from 'pages/login';
 import { SnackbarProvider } from 'notistack';
-import {
-  CurrentUserProvider,
-  useMutateCurrentUser,
-} from 'codereview/src/models/user';
+import { CurrentUserProvider, useMutateCurrentUser } from 'models/user';
 import { createMount } from '@material-ui/core/test-utils';
 
 //TODO: Renders correctly, renders poorly

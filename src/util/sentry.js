@@ -1,5 +1,5 @@
-import * as Sentry from '@sentry/node';
-import isServer from 'codereview/src/util/isServer';
+import * as Sentry from '@sentry/nextjs';
+import isServer from 'util/isServer';
 
 /**
  * Initialize Sentry and export it.

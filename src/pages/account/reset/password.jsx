@@ -6,10 +6,10 @@ import { TextField } from 'formik-material-ui';
 import { Avatar, Button, Container, Typography, Grid } from '@material-ui/core';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { makeStyles } from '@material-ui/core/styles';
-import Link from 'codereview/src/components/router/Link';
+import Link from 'components/router/Link';
 
-import AccountPageHeader from 'codereview/src/components/AccountPageHeader';
-import { ForgotPassSchema, forgotPass } from 'codereview/src/models/user';
+import AccountPageHeader from 'components/AccountPageHeader';
+import { ForgotPassSchema, forgotPass } from 'models/user';
 
 const useStyles = makeStyles(theme => ({
   paper: {

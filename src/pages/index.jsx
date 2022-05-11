@@ -85,8 +85,8 @@ function Todo() {
           validationSchema={TodoSchema}
           enableReinitialize
           initialValues={{
-            title: null,
-            description: null,
+            title: '',
+            description: '',
           }}
           onSubmit={handleFormSubmit}
         >

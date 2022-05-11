@@ -19,8 +19,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Router from 'next/router';
 
-import Link from 'codereview/src/components/router/Link';
-import { useCurrentUser, logOut } from 'codereview/src/models/user';
+import Link from 'components/router/Link';
+import { useCurrentUser, logOut } from 'models/user';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -77,7 +77,7 @@ export default function MenuAppBar() {
         >
           <MenuIcon />
         </IconButton>
-        <Grid container justify="space-between" alignItems="center">
+        <Grid container justifyContent="space-between" alignItems="center">
           <Grid item xs={6} md={3}>
             <Menu keepMounted {...bindMenu(navMenuState)}>
               <MenuItem

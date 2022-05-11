@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import Error from 'next/error';
-import * as Sentry from '@sentry/node';
+import * as Sentry from '@sentry/nextjs';
 
 const MyError = ({ statusCode, hasGetInitialPropsRun, err }) => {
   if (!hasGetInitialPropsRun && err) {

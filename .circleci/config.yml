@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   python: circleci/python@2.0.3
-  node: circleci/node@5.0.2
+  node: circleci/node@4.5.1
   heroku: circleci/heroku@1.2.6
   codecov: codecov/codecov@1.0.5
   slack: circleci/slack@3.4.2
@@ -43,11 +43,12 @@ jobs:
 
   test-nextjs:
     docker:
-      - image: circleci/node:12.13.0
+      - image: cimg/node:14.16.1
     working_directory: /home/circleci/project
     steps:
       - checkout
-      - run: yarn install --immutable
+      - node/install-packages:
+          pkg-manager: yarn
       - run: scripts/validate_js.sh
       # NOTE removing for now to get this off the ground
       # - run:

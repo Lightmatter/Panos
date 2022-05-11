@@ -14,11 +14,11 @@ import { useSnackbar } from 'notistack';
 import { Form, Field, Formik } from 'formik';
 import { TextField, Checkbox } from 'formik-material-ui';
 
-import AccountPageHeader from 'codereview/src/components/AccountPageHeader';
-import { LoginSchema, logIn } from 'codereview/src/models/user';
-import { postLoginUrl, withoutAuth } from 'codereview/src/util/withAuth';
-import Link from 'codereview/src/components/router/Link';
-import PasswordField from 'codereview/src/components/PasswordField';
+import AccountPageHeader from 'components/AccountPageHeader';
+import { LoginSchema, logIn } from 'models/user';
+import { postLoginUrl, withoutAuth } from 'util/withAuth';
+import Link from 'components/router/Link';
+import PasswordField from 'components/PasswordField';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -125,7 +125,7 @@ const Login = () => {
           </Button>
         </Form>
       </Formik>
-      <Grid container className={classes.text} justify="flex-end">
+      <Grid container className={classes.text} justifyContent="flex-end">
         <Grid item>
           <Link href="/signup" variant="body2">
             Don't have an account? Sign Up

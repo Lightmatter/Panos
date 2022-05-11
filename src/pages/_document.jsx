@@ -1,9 +1,9 @@
-import isServer from 'codereview/src/util/isServer';
+import isServer from 'util/isServer';
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from 'theme/theme';
-import * as Sentry from '@sentry/node';
+import * as Sentry from '@sentry/nextjs';
 
 /**
  * Send to Sentry all unhandled rejections.

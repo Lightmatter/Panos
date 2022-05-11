@@ -1,4 +1,4 @@
-FROM bbeecher/lightmatter-base-image:v0.2 AS os
+FROM bbeecher/lightmatter-base-image:v0.3 AS os
 
 ADD image/ /app_build/
 #add nginx conf files

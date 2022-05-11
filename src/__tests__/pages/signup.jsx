@@ -1,10 +1,7 @@
 import React from 'react';
-import Signup from 'codereview/src/pages/signup';
+import Signup from 'pages/signup';
 import { SnackbarProvider } from 'notistack';
-import {
-  CurrentUserProvider,
-  useMutateCurrentUser,
-} from 'codereview/src/models/user';
+import { CurrentUserProvider, useMutateCurrentUser } from 'models/user';
 import { createMount } from '@material-ui/core/test-utils';
 
 describe('Signup page', () => {
