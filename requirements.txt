@@ -7,7 +7,7 @@ djangorestframework-jsonapi==4.0.0
 
 
 #Admin
-Pillow==8.0.1
+Pillow==9.0.1
 django-localflavor==3.0.1
 django-import-export==2.4.0
 
