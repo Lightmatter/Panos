@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     "social_django",
     "codereview.home",
     "codereview.account",
+    "codereview.todo",
     "codereview.util",
 )
 
@@ -215,7 +216,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     "PAGE_SIZE": env("PAGE_SIZE", default=10),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",

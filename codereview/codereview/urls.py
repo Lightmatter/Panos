@@ -12,6 +12,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("social/", include("social_django.urls", namespace="social")),
     path("backend/", include("codereview.home.urls")),
+    path(r"backend/todo/", include("codereview.todo.urls")),
 ]
 
 if settings.DEBUG:
