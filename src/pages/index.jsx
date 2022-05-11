@@ -1,13 +1,23 @@
-import { useRef } from 'react';
+import AutoCompleteField from 'components/forms/fields/AutoCompleteField';
+import clsx from 'clsx';
+import { useRef, useState, useEffect } from 'react';
 import { URLS } from 'constants.js';
 import axios from 'util/axios';
 import { useSnackbar } from 'notistack';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Card, Button, Container, Typography } from '@material-ui/core';
+import {
+  Box,
+  Card,
+  Button,
+  Container,
+  Typography,
+  InputAdornment,
+} from '@material-ui/core';
 import { Formik, Form } from 'formik';
 import useSWR from 'swr';
 
-import { TodoSchema } from 'schemas';
+import SearchIcon from '@material-ui/icons/Search';
+import { TodoSchema, TodoSearchSchema } from 'schemas';
 import InputField from 'components/forms/fields/InputField';
 import Loading from 'components/Loading';
 
@@ -19,12 +29,38 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     marginBottom: theme.spacing(1),
   },
+  field: {
+    marginRight: theme.spacing(1),
+    minWidth: '176px',
+    '& .MuiInputBase-root': {
+      marginBottom: 8,
+    },
+  },
+  fieldWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    '& .MuiInputBase-root': {
+      marginBottom: 0,
+    },
+  },
+  search: {
+    minWidth: 250,
+  },
+  otherWrapper: {
+    display: 'flex',
+    justifyItems: 'center',
+  },
+  submit: {
+    marginLeft: 20,
+  },
 }));
 
 function Todo() {
   const classes = useStyles();
   const $formik = useRef();
   const { enqueueSnackbar } = useSnackbar();
+  const [todos, setTodos] = useState([]);
 
   const { data, isValidating, mutate } = useSWR(
     [URLS.api.todos],
@@ -39,8 +75,6 @@ function Todo() {
       revalidateOnFocus: false,
     }
   );
-
-  const todos = data?.results || [];
 
   const handleFormSubmit = async (values, actions) => {
     try {
@@ -67,6 +101,31 @@ function Todo() {
     }
   };
 
+  const handleSearch = values => {
+    var params = {};
+    params['category'] = null;
+    if (values.category) {
+    params['category'] = values.category.slug;
+    }
+    params['search'] = null;
+    if (values.search) {
+    params['search'] = values.search;
+    }
+   axios({
+        method: 'get',
+         url: URLS.api.todos,
+      params: params,
+    }).then(response => {
+       let results = response.data.results;
+      console.log('poop ---', results);
+      setTodos(results);
+    });
+  };
+
+  useEffect(() => {
+    setTodos(data?.results);
+  }, [data]);
+
   return (
     <>
       <Container maxWidth="md">
@@ -82,7 +141,7 @@ function Todo() {
         </Box>
         <Formik
           innerRef={$formik}
-          validationSchema={TodoSchema}
+          validationSchema={TodoSearchSchema}
           enableReinitialize
           initialValues={{
             title: '',
@@ -125,10 +184,69 @@ function Todo() {
       ) : (
         <Container maxWidth="md">
           <Box display="flex" flexWrap="wrap" mt={6} justifyContent="center">
-            <Box width="100%" display="flex" justifyContent="center" mb={4}>
+            <Box
+              width="100%"
+              display="flex"
+              justifyContent="space-between"
+              mb={4}
+            >
               <Typography variant="h3">My Todos</Typography>
+              <Formik
+                innerRef={$formik}
+                validationSchema={TodoSearchSchema}
+                enableReinitialize
+                initialValues={{
+                  category: null,
+                  search: '',
+                  description: '',
+                }}
+                onSubmit={handleSearch}
+              >
+                {({ values, handleSubmit, isValid, dirty }) => (
+                  <Form onSubmit={handleSubmit}>
+                    <Box className={classes.fieldWrapper}>
+                      <AutoCompleteField
+                       fullWidth
+                       name="category"
+                       type="text"
+                       label="Category"
+                       value={values.category}
+                       optionLabel={option => `${option.name}`}
+                       variant="filled"
+                       callbackURL={URLS.api.categories}
+                       className={classes.field}
+                       disabled={false}
+                     />
+                      <InputField
+                        fullWidth
+                        name="search"
+                        type="text"
+                        variant="outlined"
+                        label="Search for Todoos"
+                        className={clsx(classes.field, classes.search)}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start"> <SearchIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <Button
+                        type="submit"
+                        color="primary"
+                        variant="contained"
+                        size="large"
+                        className={classes.submit}
+                        disabled={!isValid && dirty}
+                      >
+                        Search
+                    </Button>
+                  </Box>
+                  </Form>
+                )}
+              </Formik>
             </Box>
-            {todos.length > 0 ? (
+            {todos && todos.length > 0 ? (
               todos.map((todo, index) => (
                 <Card key={index} raised className={classes.todo}>
                   <Typography>{todo.title}</Typography>
