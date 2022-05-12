@@ -15,10 +15,11 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class TodoViewSet(viewsets.ModelViewSet):
-
-    queryset = Todo.objects.all()
     serializer_class = TodoSerializer
     pagination_class = BasePagination
+
+    def get_queryset(self):
+        return Todo.objects.all
 
     def destroy(self, request, *args, **kwargs):
         # Sets is_active to false instead of deleting
@@ -27,6 +28,6 @@ class TodoViewSet(viewsets.ModelViewSet):
             todo = self.get_object()
             todo.is_active = False
             return Response(data="delete success")
-        except ObjectDoesNotExist, ValueError:
+        except (ObjectDoesNotExist, ValueError):
             print("Given object does not exist!")
             return Response(data="delete success")
