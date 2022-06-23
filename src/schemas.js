@@ -6,5 +6,9 @@ const TodoSchema = Yup.object().shape({
   description: Yup.string().nullable(),
 });
 
-// eslint-disable-next-line import/prefer-default-export
-export { TodoSchema };
+const TodoSearchSchema = Yup.object().shape({
+  category: Yup.string().nullable(),
+  search: Yup.string().nullable(),
+});
+
+export { TodoSchema, TodoSearchSchema };
