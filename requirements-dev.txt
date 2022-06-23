@@ -5,7 +5,7 @@ isort==4.2.5
 black==19.10b0
 
 # Debug Tools
-django-debug-toolbar==3.2
+django-debug-toolbar==3.2.1
 django-template-debug==0.3.5
 
 # Testing
