@@ -133,6 +133,14 @@ function Todo() {
                 <Card key={index} raised className={classes.todo}>
                   <Typography>{todo.title}</Typography>
                   <Typography>{todo.description}</Typography>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      axios.delete('/backend/todos/${todo.id}');
+                    }}
+                  >
+                    Archive
+                  </Button>
                 </Card>
               ))
             ) : (
